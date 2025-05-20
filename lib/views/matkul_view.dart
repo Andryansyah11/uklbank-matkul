@@ -69,7 +69,8 @@ class _MatkulViewPageState extends State<MatkulViewPage> {
                       Expanded(
                         child: ListView.separated(
                           itemCount: matkulList.length,
-                          separatorBuilder: (context, index) => const SizedBox(height: 12),
+                          separatorBuilder: (context, index) =>
+                              const SizedBox(height: 12),
                           itemBuilder: (context, index) {
                             var matkul = matkulList[index];
                             return Container(
@@ -85,7 +86,8 @@ class _MatkulViewPageState extends State<MatkulViewPage> {
                                 ],
                               ),
                               child: ListTile(
-                                contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                                contentPadding: const EdgeInsets.symmetric(
+                                    horizontal: 16, vertical: 8),
                                 leading: CircleAvatar(
                                   backgroundColor: Colors.blue.shade100,
                                   child: Text(
@@ -93,7 +95,8 @@ class _MatkulViewPageState extends State<MatkulViewPage> {
                                     style: const TextStyle(color: Colors.blue),
                                   ),
                                 ),
-                                title: Text(matkul['nama_matkul'] ?? "Tidak diketahui"),
+                                title: Text(
+                                    matkul['nama_matkul'] ?? "Tidak diketahui"),
                                 subtitle: Text("${matkul['sks'] ?? '-'} SKS"),
                                 trailing: Checkbox(
                                   value: selected[index],
@@ -114,35 +117,36 @@ class _MatkulViewPageState extends State<MatkulViewPage> {
                         width: double.infinity,
                         child: ElevatedButton(
                           onPressed: () {
-  List<Map<String, dynamic>> selectedMatkul = [];
+                            List<Map<String, dynamic>> selectedMatkul = [];
 
-  for (int i = 0; i < selected.length; i++) {
-    if (selected[i]) {
-      selectedMatkul.add({
-        "id": matkulList[i]['id'],
-        "nama_matkul": matkulList[i]['nama_matkul'],
-        "sks": matkulList[i]['sks'],
-      });
-    }
-  }
+                            for (int i = 0; i < selected.length; i++) {
+                              if (selected[i]) {
+                                selectedMatkul.add({
+                                  "id": matkulList[i]['id'],
+                                  "nama_matkul": matkulList[i]['nama_matkul'],
+                                  "sks": matkulList[i]['sks'],
+                                });
+                              }
+                            }
 
-  final responseMap = {
-    "status": true,
-    "message": "Matkul selected successfully",
-    "data": {
-      "list_matkul": selectedMatkul,
-    }
-  };
+                            final responseMap = {
+                              "status": true,
+                              "message": "Matkul selected successfully",
+                              "data": {
+                                "list_matkul": selectedMatkul,
+                              }
+                            };
 
-  // Cetak ke terminal dengan format JSON
-  print(const JsonEncoder.withIndent('  ').convert(responseMap));
+                            // Cetak ke terminal dengan format JSON
+                            print(const JsonEncoder.withIndent('  ')
+                                .convert(responseMap));
 
-  // Snackbar untuk konfirmasi di UI
-  ScaffoldMessenger.of(context).showSnackBar(
-    const SnackBar(content: Text("Mata kuliah disimpan")),
-  );
-},
-
+                            // Snackbar untuk konfirmasi di UI
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                  content: Text("Mata kuliah disimpan")),
+                            );
+                          },
                           style: ElevatedButton.styleFrom(
                             backgroundColor: Colors.blue,
                             padding: const EdgeInsets.symmetric(vertical: 16),

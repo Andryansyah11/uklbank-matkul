@@ -36,7 +36,7 @@ class _DashboardViewState extends State<DashboardView> {
               icon: Icon(Icons.person_outlined)),
         ],
       ),
-      body: Center(child: Text("Selamat Datang ${userLogin.username}")),
+      body: Center(child: Text("Selamat Datang")),
       bottomNavigationBar: BottomNav(0),
     );
   }
