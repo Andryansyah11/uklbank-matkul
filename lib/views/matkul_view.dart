@@ -54,7 +54,7 @@ class _MatkulViewPageState extends State<MatkulViewPage> {
       backgroundColor: const Color(0xFFFEF6FF), // Sesuaikan warna dasar
       appBar: AppBar(
         title: const Text('Daftar Mata Kuliah'),
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.blue,
         elevation: 1,
         foregroundColor: Colors.black,
       ),
@@ -114,15 +114,35 @@ class _MatkulViewPageState extends State<MatkulViewPage> {
                         width: double.infinity,
                         child: ElevatedButton(
                           onPressed: () {
-                            List selectedMatkul = [];
-                            for (int i = 0; i < selected.length; i++) {
-                              if (selected[i]) selectedMatkul.add(matkulList[i]);
-                            }
-                            print("Mata kuliah terpilih: $selectedMatkul");
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(content: Text("Mata kuliah disimpan")),
-                            );
-                          },
+  List<Map<String, dynamic>> selectedMatkul = [];
+
+  for (int i = 0; i < selected.length; i++) {
+    if (selected[i]) {
+      selectedMatkul.add({
+        "id": matkulList[i]['id'],
+        "nama_matkul": matkulList[i]['nama_matkul'],
+        "sks": matkulList[i]['sks'],
+      });
+    }
+  }
+
+  final responseMap = {
+    "status": true,
+    "message": "Matkul selected successfully",
+    "data": {
+      "list_matkul": selectedMatkul,
+    }
+  };
+
+  // Cetak ke terminal dengan format JSON
+  print(const JsonEncoder.withIndent('  ').convert(responseMap));
+
+  // Snackbar untuk konfirmasi di UI
+  ScaffoldMessenger.of(context).showSnackBar(
+    const SnackBar(content: Text("Mata kuliah disimpan")),
+  );
+},
+
                           style: ElevatedButton.styleFrom(
                             backgroundColor: Colors.blue,
                             padding: const EdgeInsets.symmetric(vertical: 16),

@@ -128,8 +128,8 @@ class _LoginViewState extends State<LoginView> {
                                     });
                                     AlertMessage().showAlert(context, result.message, result.status);
                                     if (result.status) {
-                                      Future.delayed(Duration(seconds: 2), () {
-                                        Navigator.pushNamed(context, '/dashboard');
+                                      Future.delayed(Duration(seconds: 1), () {
+                                        Navigator.pushReplacementNamed(context, '/dashboard');
                                       });
                                     }
                                   }
@@ -149,7 +149,7 @@ class _LoginViewState extends State<LoginView> {
                 // Optional Footer: Forgot Password
                 TextButton(
                   onPressed: () {
-                    Navigator.pushNamed(context, '/register');
+                    Navigator.pushReplacementNamed(context, '/register');
                   },
                   child: Text(
                     'Dont Have account? Register',
